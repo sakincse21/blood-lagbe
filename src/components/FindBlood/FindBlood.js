@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './FindBlood.css';
 
-const FindBlood = () => {
+const FindBlood = (props) => {
     const areas = [
         "Jhiltuly",
         "South Jhiltuly",
@@ -17,21 +17,9 @@ const FindBlood = () => {
     ];
     const areaSelect = document.getElementById("area");
 
-    useEffect(() => {
-        while (areaSelect !== null) {
-            areas.map(optn => {
-                let el = document.createElement("option");
-                el.textContent = optn;
-                el.value = optn;
-                areaSelect.appendChild(el);
-            })
-        }
-    }, )
-
     function dateCalculation(date) {
         // Parse the string date '2024-10-02'
         const targetDate = new Date(date);
-
         // Get the current date
         const currentDate = new Date();
 
@@ -49,7 +37,7 @@ const FindBlood = () => {
 
     }
     
-    const [donors, setDonors]=useState([]);
+    const [donors, setDonors, setBtnclick]=props.setter;
     const [bloodGroup, setBloodGroup]=useState('');
     const [area, setArea]=useState('');
     const searchNow = ()=>{
@@ -60,27 +48,46 @@ const FindBlood = () => {
             setBloodGroup(temp);
         }
         console.log(bloodGroup);
-
+        setBtnclick(true);
+        const temp=[];
 
         fetch(`http://192.168.1.3:3001/donors?area=${area}&bloodGroup=${bloodGroup}`)
             .then(res => res.json())
             .then(data => {
                 data.map(user => {
                     if(Math.abs(dateCalculation(user.date))>90){
-                        donors.push(user);
+                        temp.push(user);
                     }
                 })
                 console.log(donors);
-                
+                setDonors(temp);
+                setBtnclick(true);
             })
     }
+
+    const [chk, setChk]=useState(false);
+
+    useEffect(() => {
+        if (areaSelect !== null && chk===false) {
+            areas.map((optn) => {
+                let el = document.createElement("option");
+                el.textContent = optn;
+                el.value = optn;
+                areaSelect.appendChild(el);
+            })
+            setChk(true);
+
+        }
+    }, )
+
+
     return (
         <div className='FindBlood '>
             <label for="area">Area</label><br />
             <select id="area" className='form-control' onBlur={(e)=>{setArea(e.target.value)}}/><br />
             <label for="bloodGroup">Blood Group</label><br />
             <input type="text" name="bloodGroup" id="bloodGroup" className='form-control' onBlur={(e)=>{setBloodGroup(e.target.value)}}/><br />
-            <button onClick={searchNow}>Search</button>
+            <button onClick={searchNow} className='btn form-control'>Search</button>
         </div>
     );
 };

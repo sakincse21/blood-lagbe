@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <div className='Header justify-content-between d-flex flex-row'>
             <div className='d-flex justify-content-start'>
-                <h2 className='mx-2'>LifeDrop</h2>
+                <h2 className='mx-2'>Blood Lagbe</h2>
             </div>
             <div className='d-flex flex-row'>
             <ul className="nav justify-content-end">
