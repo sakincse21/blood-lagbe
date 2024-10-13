@@ -1,0 +1,8 @@
+img{
+    width: 50%;
+}
+@media (min-width:992px) {
+    img{
+        width: 75%;
+    }
+}

@@ -65,28 +65,26 @@ const FindBlood = (props) => {
             })
     }
 
-    const [chk, setChk]=useState(false);
-
-    useEffect(() => {
-        if (areaSelect !== null && chk===false) {
-            areas.map((optn) => {
-                let el = document.createElement("option");
-                el.textContent = optn;
-                el.value = optn;
-                areaSelect.appendChild(el);
-            })
-            setChk(true);
-
-        }
-    }, )
+    const handleSelectChange = (event) => {
+        event.preventDefault();
+        setArea(event.target.value);
+        console.log("Selected area: ", event.target.value);  // For debugging or further use
+    };
 
 
     return (
         <div className='FindBlood '>
             <label for="area">Area</label><br />
-            <select id="area" className='form-control' onBlur={(e)=>{setArea(e.target.value)}}/><br />
+            <select id="area" value={area} onChange={handleSelectChange} className="form-select">
+                        {areas.map((ar, index) => (
+                            <option key={index} value={ar}>
+                                {ar}
+                            </option>
+                        ))}
+                    </select>
             <label for="bloodGroup">Blood Group</label><br />
-            <input type="text" name="bloodGroup" id="bloodGroup" className='form-control' onBlur={(e)=>{setBloodGroup(e.target.value)}}/><br />
+            <input type="text" name="bloodGroup" id="bloodGroup" className='form-control' onBlur={(e)=>{
+            e.preventDefault();;setBloodGroup(e.target.value)}}/><br />
             <button onClick={searchNow} className='btn form-control'>Search</button>
         </div>
     );
