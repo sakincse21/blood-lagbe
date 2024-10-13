@@ -1,0 +1,12 @@
+.nav-link{
+    text-decoration: none;
+    list-style: none !important;
+    color: black;
+    font-weight: 600;
+}
+h2{
+    font-weight: 700;
+}
+span{
+    text-decoration: none;
+}
