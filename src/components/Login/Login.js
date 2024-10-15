@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import './Login.css';
 import firebaseConfig from './fbaseinfo';
 import googleIcon from '../../imgs/icons8-google-96.png';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import firebase from 'firebase/compat/app';
+import { UserContext } from '../../App';
 
 firebase.initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
-const Login = (props) => {
-    const setLoginEmail=props.setLoginEmail;
+const Login = () => {
+    const [loginEmail, setLoginEmail, decodedToken, isExpired, isDonor, setIsDonor, user, setUser] = useContext(UserContext);
     const handleClick = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.idToken;
-                sessionStorage.setItem('token',token);
                 const user = result.user;
                 setLoginEmail(user.email);
-                console.log(user.email);
+                setIsDonor(false);
+                // console.log(user.email);
+                localStorage.setItem('token',credential.idToken);
                 
             }).catch((error) => {
                 console.log(error);
@@ -29,9 +31,9 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <button className='btn btn-primary' onClick={handleClick}>
-                <img src={googleIcon} alt="google" style={{ width: "48px" }} /> <span>Sign In</span>
+        <div className='logindiv'>
+            <button className='loginbtn ' onClick={handleClick}>
+                <img src={googleIcon} alt="google" style={{ width: "36px" }} /> <span className='text'>Sign In</span>
             </button>
         </div>
     );

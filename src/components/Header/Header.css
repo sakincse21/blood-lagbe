@@ -1,5 +1,4 @@
 .nav-link{
-    text-decoration: none;
     list-style: none !important;
     color: black;
     font-weight: 600;
@@ -13,4 +12,13 @@ span{
 .logo-img{
     width: 48px;
     height: auto;
+}
+.mylink{
+    text-decoration: none !important;
+
+}
+.logoutbtn{
+    border: none !important;
+    background-color: salmon !important;
+    color: white;
 }
