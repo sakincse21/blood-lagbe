@@ -3,11 +3,17 @@
 }
 .donorbtn{
     color: white;
-    background-color: #c53f3f;
+    background-color: #c53f3f !important;
     border: none;
 }
 .findbtn{
-    background-color: white;
-    color: #c53f3f;
+    background-color: white !important;
+    color: #c53f3f !important;
     border: none;
+}
+.card-title{
+    /* font-size: 1.2rem !important; */
+}
+.card-img{
+    width: 42%;
 }

@@ -15,7 +15,7 @@ const FindBlood = (props) => {
         "Ambikapur",
         "New Market"
     ];
-    const areaSelect = document.getElementById("area");
+    const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
     function dateCalculation(date) {
         // Parse the string date '2024-10-02'
@@ -30,62 +30,77 @@ const FindBlood = (props) => {
         const millisecondsPerDay = 1000 * 60 * 60 * 24;
         const daysDifference = Math.floor(timeDifference / millisecondsPerDay);
 
-        
-        
+
+
         // Output the difference
         return daysDifference;
 
     }
-    
-    const [donors, setDonors, setBtnclick]=props.setter;
-    const [bloodGroup, setBloodGroup]=useState('');
-    const [area, setArea]=useState('');
-    const searchNow = ()=>{
-        // setArea(document.getElementById('area').value);
-        // setBloodGroup(document.getElementById('bloodGroup').value);
-        if (bloodGroup[1] === '+') {
-            const temp = bloodGroup[0] + "%2B";
-            setBloodGroup(temp);
-        }
-        console.log(bloodGroup);
-        setBtnclick(true);
-        const temp=[];
 
-        fetch(`http://192.168.1.3:3001/donors?area=${area}&bloodGroup=${bloodGroup}`)
+    const [donors, setDonors, setBtnclick] = props.setter;
+    const [bloodGroup, setBloodGroup] = useState('');
+    const [area, setArea] = useState('');
+    const searchNow = async () => {
+        let encodedBloodGroup = bloodGroup;
+        if (bloodGroup === 'A+') encodedBloodGroup = 'A%2B';
+        else if (bloodGroup === 'B+') encodedBloodGroup = 'B%2B';
+        else if (bloodGroup === 'O+') encodedBloodGroup = 'O%2B';
+        else if (bloodGroup === 'AB+') encodedBloodGroup = 'AB%2B';
+        console.log(bloodGroup);
+        // setBtnclick(true);
+        const temp = [];
+
+        await fetch(`http://192.168.1.3:3001/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
             .then(res => res.json())
             .then(data => {
                 data.map(user => {
-                    if(Math.abs(dateCalculation(user.date))>90){
+                    console.log(Math.abs(dateCalculation(user.date)));
+                    
+                    if (Math.abs(dateCalculation(user.date)) > 90) {
                         temp.push(user);
                     }
                 })
                 console.log(donors);
                 setDonors(temp);
-                setBtnclick(true);
+                // setBtnclick(true);
             })
     }
 
-    const handleSelectChange = (event) => {
+    const handleAreaChange = (event) => {
         event.preventDefault();
         setArea(event.target.value);
+        console.log("Selected area: ", event.target.value);  // For debugging or further use
+    };
+
+    const handleBloodGroupChange = (event) => {
+        event.preventDefault();
+        setBloodGroup(event.target.value);
         console.log("Selected area: ", event.target.value);  // For debugging or further use
     };
 
 
     return (
         <div className='FindBlood '>
-            <label for="area">Area</label><br />
-            <select id="area" value={area} onChange={handleSelectChange} className="form-select">
-                        {areas.map((ar, index) => (
-                            <option key={index} value={ar}>
-                                {ar}
-                            </option>
-                        ))}
-                    </select>
-            <label for="bloodGroup">Blood Group</label><br />
-            <input type="text" name="bloodGroup" id="bloodGroup" className='form-control' onBlur={(e)=>{
-            e.preventDefault();;setBloodGroup(e.target.value)}}/><br />
-            <button onClick={searchNow} className='btn form-control'>Search</button>
+            <label for="area" className=' form-label'>Area</label>
+            <select id="area" value={area} onChange={handleAreaChange} className="form-select">
+                <option value="">All Area</option>
+                {areas.map((ar, index) => (
+                    <option key={index} value={ar}>
+                        {ar}
+                    </option>
+                ))}
+            </select> <br />
+            <label for="bloodGroup" className=' form-label'>Blood Group</label>
+            <select id="area" value={bloodGroup} onChange={handleBloodGroupChange} className="form-select">
+                <option value="">All Groups</option>
+                {bloodGroups.map((bg, index) => (
+                    <option key={index} value={bg}>
+                        {bg}
+                    </option>
+                ))}
+            </select><br />
+
+            <button onClick={searchNow} className='btn form-control searchbtn'>Search</button>
         </div>
     );
 };

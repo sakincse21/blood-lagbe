@@ -1,12 +1,14 @@
 import React from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import logo from '../../imgs/icons8-blood-drop-100.png';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
     return (
         <div className='Header justify-content-between d-flex flex-row'>
-            <div className='d-flex justify-content-start'>
+            <div className='d-flex justify-content-start align-items-end'>
+                <img src={logo} alt="logo" className='logo-img' />
                 <h2 className='mx-2'>Blood Lagbe</h2>
             </div>
             <div className='d-flex flex-row'>

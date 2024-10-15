@@ -10,3 +10,7 @@ h2{
 span{
     text-decoration: none;
 }
+.logo-img{
+    width: 48px;
+    height: auto;
+}

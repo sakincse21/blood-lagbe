@@ -31,7 +31,7 @@ const Home = () => {
                         <div className=" d-flex flex-row flex-wrap gap-4 justify-content-center align-items-center">
                             {
                                 donors.map(donor =>
-                                    (<DonorCard details={[donor.name, donor.area, donor.bloodGroup, donor.mobile]} key={donor.index} />)
+                                    (<DonorCard details={[donor.name, donor.area, donor.bloodGroup, donor.mobile]} key={donor.id} />)
                                 )
                             }
                         </div>

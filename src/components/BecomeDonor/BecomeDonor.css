@@ -1,8 +1,17 @@
 img{
-    width: 50%;
+    width: 60%;
 }
 @media (min-width:992px) {
     img{
-        width: 75%;
+        width: 80%;
+        filter: drop-shadow(1px 1px 12px rgba(161, 161, 161, 0.726));
     }
+}
+.btn{
+    background-color: gray;
+    color: white;
+}
+.btn:hover{
+    background-color: #c53f3f;
+    color: white;
 }
