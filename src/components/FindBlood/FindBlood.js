@@ -50,13 +50,13 @@ const FindBlood = (props) => {
         // setBtnclick(true);
         const temp = [];
 
-        await fetch(`http://192.168.1.3:3001/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
+        await fetch(`http://localhost:3001/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
             .then(res => res.json())
             .then(data => {
                 data.map(user => {
-                    console.log(Math.abs(dateCalculation(user.date)));
+                    console.log(Math.abs(dateCalculation(user.date[user.date.length-1])));
                     
-                    if (Math.abs(dateCalculation(user.date)) > 90) {
+                    if (Math.abs(dateCalculation(user.date[0])) > 90) {
                         temp.push(user);
                     }
                 })

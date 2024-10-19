@@ -5,8 +5,11 @@ import googleIcon from '../../imgs/icons8-google-96.png';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import firebase from 'firebase/compat/app';
 import { UserContext } from '../../App';
+import { initializeApp } from 'firebase/app';
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
+
+const app = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 

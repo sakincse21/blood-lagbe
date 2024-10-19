@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BecomeDonor = () => {
     // console.log(decodedToken);
-    const [loginEmail, setLoginEmail, decodedToken, isExpired, isDonor, setIsDonor, user, setUser] = useContext(UserContext);
+    const [loginEmail, setLoginEmail, clientDecodedToken, setClientDecodedToken, checkExpired, setCheckExpired, isDonor, setIsDonor, user, setUser] = useContext(UserContext);
     const [name, setName] = useState('');
     const [area, setArea] = useState('');
     const [mobile, setMobile] = useState(0);
@@ -22,12 +22,12 @@ const BecomeDonor = () => {
 
     const navigate = useNavigate();
 
-    if (decodedToken) {
+    if (clientDecodedToken) {
         // console.log(isExpired);
-        if (isExpired) {
+        if (checkExpired) {
             setLoginEmail('');
         } else {
-            setLoginEmail(decodedToken.email);
+            setLoginEmail(clientDecodedToken.email);
         }
         // console.log('yee');
 
@@ -75,16 +75,16 @@ const BecomeDonor = () => {
         setUser({
             name, age, area, mobile, bloodGroup,
             email: loginEmail,
-            date: lastdonation
+            date: [lastdonation]
         });
 
         if (mobilechk && name && area && (age >= 18 && age <= 50) && bloodGroup && lastdonation) {
-            fetch('http://192.168.1.3:3001/beadonor', {
+            fetch('http://localhost:3001/beadonor', {
                 method: "POST",
                 body: JSON.stringify({
                     name, age, area, mobile, bloodGroup,
                     email: loginEmail,
-                    date: lastdonation,
+                    date: [lastdonation],
                     isDonor: true
                 }),
                 headers: {
@@ -105,7 +105,7 @@ const BecomeDonor = () => {
             const encodedEmail = loginEmail.replace('@', '%40');
             // console.log(encodedEmail);
 
-            fetch(`http://192.168.1.3:3001/isdonor?email=${encodedEmail}`)
+            fetch(`http://localhost:3001/isdonor?email=${encodedEmail}`)
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);

@@ -25,6 +25,8 @@
     margin: 0px;
     transition: margin 1s ;
 }
-.text:hover{
-    margin: 0 20px;
+.loginbtn:hover{
+    .text{
+        margin: 0 15px;
+    }
 }

@@ -4,15 +4,27 @@ import logo from '../../imgs/icons8-blood-drop-100.png';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { UserContext } from '../../App';
+import { useJwt } from "react-jwt";
+import userToken from '../Login/token';
+
+
+
 
 const Header = () => {
-    const [loginEmail, setLoginEmail, decodedToken, isExpired, isDonor, setIsDonor, user, setUser] = useContext(UserContext);
+    const {decodedToken, isExpired}=useJwt(userToken);
+    const [loginEmail, setLoginEmail, clientDecodedToken, setClientDecodedToken, checkExpired, setCheckExpired, isDonor, setIsDonor, user, setUser] = useContext(UserContext);
+    
+    setClientDecodedToken(decodedToken);
+    setCheckExpired(isExpired);
+
     const navigate=useNavigate();
     const handleLogOut=()=>{
         localStorage.removeItem('token');
+        setClientDecodedToken('');
+        setCheckExpired(true);
         setIsDonor(false);
         setLoginEmail('');
-        setUser({});
+        setUser({date: []});
         navigate("/");
     }
     return (
