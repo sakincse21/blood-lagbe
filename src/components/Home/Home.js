@@ -21,8 +21,8 @@ const Home = () => {
                         <Route Component={HomeInfo} path='/*' />
                     </Routes>
                 </div>
-                <div className="col-lg-6 d-flex justify-content-center align-items-center p-5">
-                    <img src={donateImg} alt="donate" />
+                <div className="col-lg-6 d-flex justify-content-center align-items-center p-5 donorimg">
+                    <img src={donateImg} alt="donate"  />
                 </div>
             </div>
             <div>
@@ -31,7 +31,7 @@ const Home = () => {
                         <div className=" d-flex flex-row flex-wrap gap-4 justify-content-center align-items-center">
                             {
                                 donors.map(donor =>
-                                    (<DonorCard details={[donor.name, donor.area, donor.bloodGroup, donor.mobile]} key={donor.id} />)
+                                    (<DonorCard details={[donor.name, donor.area, donor.bloodGroup, donor.mobile, donor.date]} key={donor.id} />)
                                 )
                             }
                         </div>

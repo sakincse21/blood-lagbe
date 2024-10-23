@@ -15,3 +15,6 @@ img{
     background-color: #c53f3f;
     color: white;
 }
+.find-select{
+    max-width: 100% !important;
+}

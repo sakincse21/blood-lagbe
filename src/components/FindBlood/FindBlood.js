@@ -50,11 +50,11 @@ const FindBlood = (props) => {
         // setBtnclick(true);
         const temp = [];
 
-        await fetch(`http://localhost:3001/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
+        await fetch(`https://blood-lagbe-server2.vercel.app/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
             .then(res => res.json())
             .then(data => {
                 data.map(user => {
-                    console.log(Math.abs(dateCalculation(user.date[user.date.length-1])));
+                    console.log(Math.abs(dateCalculation(user.date[0])));
                     
                     if (Math.abs(dateCalculation(user.date[0])) > 90) {
                         temp.push(user);
@@ -82,7 +82,7 @@ const FindBlood = (props) => {
     return (
         <div className='FindBlood '>
             <label for="area" className=' form-label'>Area</label>
-            <select id="area" value={area} onChange={handleAreaChange} className="form-select">
+            <select id="area" value={area} onChange={handleAreaChange} className="form-select find-select">
                 <option value="">All Area</option>
                 {areas.map((ar, index) => (
                     <option key={index} value={ar}>
@@ -91,7 +91,7 @@ const FindBlood = (props) => {
                 ))}
             </select> <br />
             <label for="bloodGroup" className=' form-label'>Blood Group</label>
-            <select id="area" value={bloodGroup} onChange={handleBloodGroupChange} className="form-select">
+            <select id="area" value={bloodGroup} onChange={handleBloodGroupChange} className="form-select find-select">
                 <option value="">All Groups</option>
                 {bloodGroups.map((bg, index) => (
                     <option key={index} value={bg}>

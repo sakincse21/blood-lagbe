@@ -6,3 +6,6 @@ label{
 .searchbtn{
     background-color: #c53f3f !important;
 }
+.find-select{
+    max-width: 100% !important;
+}

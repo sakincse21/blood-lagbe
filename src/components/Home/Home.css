@@ -17,4 +17,14 @@ img{
     img{
         width: 75%;
     }
+    
+}
+.donorimg{
+    display: block !important;
+    animation: disply 0.5s ease-in-out;
+}
+@media (max-width:992px) {
+    .donorimg{
+        display: none !important;
+    }
 }

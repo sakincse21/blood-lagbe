@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import BecomeDonor from './components/BecomeDonor/BecomeDonor';
 import { createContext, useState } from 'react';
 import Profile from './components/Profile/Profile';
+import Footer from './components/Footer/Footer';
 
 export const UserContext = createContext();
 
@@ -26,6 +27,7 @@ function App() {
             <Route Component={Home} path='/*' />
           </Routes>
         </Router>
+        <Footer></Footer>
       </div>
     </UserContext.Provider>
   );

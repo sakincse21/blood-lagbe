@@ -6,7 +6,7 @@ import userIcon from '../../imgs/icons8-friend-100(1).png';
 
 const DonorCard = (props) => {
     //console.log(name,area,bloodGroup,mobile);
-    const [ name, area, bloodGroup, mobile ]=props.details;
+    const [ name, area, bloodGroup, mobile, date ]=props.details;
     return (
         <div className="card text-center ">
             <div className="card-body d-flex flex-column gap-2 align-items-center ">

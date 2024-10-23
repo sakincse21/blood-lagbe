@@ -1,0 +1,12 @@
+input{
+    max-width: 50%;
+    margin: auto;
+}
+select{
+    max-width: 50%;
+    margin: auto;
+}
+.profbtn{
+    margin: 10px 15px;
+    padding: 5px 20px;
+}

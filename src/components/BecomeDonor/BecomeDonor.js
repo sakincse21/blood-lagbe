@@ -79,7 +79,7 @@ const BecomeDonor = () => {
         });
 
         if (mobilechk && name && area && (age >= 18 && age <= 50) && bloodGroup && lastdonation) {
-            fetch('http://localhost:3001/beadonor', {
+            fetch('https://blood-lagbe-server2.vercel.app/beadonor', {
                 method: "POST",
                 body: JSON.stringify({
                     name, age, area, mobile, bloodGroup,
@@ -103,9 +103,16 @@ const BecomeDonor = () => {
     useEffect(() => {
         if (loginEmail) {
             const encodedEmail = loginEmail.replace('@', '%40');
+            const token=localStorage.getItem('token');
             // console.log(encodedEmail);
 
-            fetch(`http://localhost:3001/isdonor?email=${encodedEmail}`)
+            fetch(`https://blood-lagbe-server2.vercel.app/isdonor?email=${encodedEmail}`, {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${token}`,  // Pass the token in the Authorization header
+                  'Content-Type': 'application/json'
+                }
+              })
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);
@@ -142,12 +149,12 @@ const BecomeDonor = () => {
                         <h3 className=' text-bg-danger'>Donor Registration</h3> <br />
 
                         <label for="name" className=' form-label'>Name</label>
-                        <input type="text" placeholder='Full Name' name="name" id="name" className=' form-control' onChange={(e) => {
+                        <input type="text" placeholder='Full Name' name="name" id="name" className=' form-control find-select' onChange={(e) => {
                             e.preventDefault(); setName(e.target.value);
                         }} required={true} /> <br />
 
                         <label for="area" className=' form-label'>Area</label>
-                        <select id="area" value={area} onChange={handleAreaChange} className="form-select" required={true}>
+                        <select id="area" value={area} onChange={handleAreaChange} className="form-select find-select" required={true}>
                             <option value="" key={-1}>Select Area</option>
                             {areas.map((ar, index) => (
                                 <option key={index} value={ar}>
@@ -157,12 +164,12 @@ const BecomeDonor = () => {
                         </select> <br />
 
                         <label for="mobile" className=' form-label'>Mobile</label>
-                        <input type="tel" placeholder={'+8801#########'} name="mobile" id="mobile" className=' form-control' onChange={(e) => {
+                        <input type="tel" placeholder={'+8801#########'} name="mobile" id="mobile" className=' form-control find-select' onChange={(e) => {
                             e.preventDefault(); setMobile(e.target.value);
                         }} required={true} /><br />
 
                         <label for="bloodGroup" className=' form-label'>Blood Group</label>
-                        <select id="area" value={bloodGroup} onChange={handleBloodGroupChange} className="form-select" required={true}>
+                        <select id="area" value={bloodGroup} onChange={handleBloodGroupChange} className="form-select find-select" required={true}>
                             <option value="" key={-1}>Select Group</option>
                             {bloodGroups.map((bg, index) => (
                                 <option key={index} value={bg}>
@@ -172,12 +179,12 @@ const BecomeDonor = () => {
                         </select> <br />
 
                         <label for="age" className=' form-label'>Age</label>
-                        <input type="number" name="age" id="age" className=' form-control' onChange={(e) => {
+                        <input type="number" name="age" id="age" className=' form-control find-select' onChange={(e) => {
                             e.preventDefault(); setAge(e.target.value);
                         }} required={true} /><br />
 
                         <label for="date" className=' form-label'>Last Donation</label>
-                        <input type="date" placeholder={currentDate} name="date" id="date" className=' form-control' onChange={(e) => {
+                        <input type="date" placeholder={currentDate} name="date" id="date" className=' form-control find-select' onChange={(e) => {
                             e.preventDefault(); setLastdonation(e.target.value);
                         }} required={true} /> <br />
 
