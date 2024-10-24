@@ -79,7 +79,7 @@ const BecomeDonor = () => {
         });
 
         if (mobilechk && name && area && (age >= 18 && age <= 50) && bloodGroup && lastdonation) {
-            fetch('https://blood-lagbe-server2.vercel.app/beadonor', {
+            fetch('https://blood-lagbe-server2.onrender.com/beadonor', {
                 method: "POST",
                 body: JSON.stringify({
                     name, age, area, mobile, bloodGroup,
@@ -106,7 +106,7 @@ const BecomeDonor = () => {
             const token=localStorage.getItem('token');
             // console.log(encodedEmail);
 
-            fetch(`https://blood-lagbe-server2.vercel.app/isdonor?email=${encodedEmail}`, {
+            fetch(`https://blood-lagbe-server2.onrender.com/isdonor?email=${encodedEmail}`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${token}`,  // Pass the token in the Authorization header

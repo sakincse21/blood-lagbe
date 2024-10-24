@@ -50,7 +50,7 @@ const FindBlood = (props) => {
         // setBtnclick(true);
         const temp = [];
 
-        await fetch(`https://blood-lagbe-server2.vercel.app/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
+        await fetch(`https://blood-lagbe-server2.onrender.com/donors?area=${area}&bloodGroup=${encodedBloodGroup}`)
             .then(res => res.json())
             .then(data => {
                 data.map(user => {

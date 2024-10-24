@@ -40,7 +40,7 @@ const Profile = () => {
             const token=localStorage.getItem('token');
             // console.log(encodedEmail);
 
-            fetch(`https://blood-lagbe-server2.vercel.app/isdonor?email=${encodedEmail}`, {
+            fetch(`https://blood-lagbe-server2.onrender.com/isdonor?email=${encodedEmail}`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${token}`,  // Pass the token in the Authorization header
@@ -82,7 +82,7 @@ const Profile = () => {
     const handleSave = () => {
 
         if (validateBDPhoneNumber(mobile)) {
-            fetch('https://blood-lagbe-server2.vercel.app/update', {
+            fetch('https://blood-lagbe-server2.onrender.com/update', {
                 method: "PATCH",
                 body: JSON.stringify({
                     token: localStorage.getItem('token'),
